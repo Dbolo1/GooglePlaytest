@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">GooglePlay</string>
     <string name="repetition">加载失败,点击重试</string>
+    <string name="load_more_data">加载更多...</string>
+    <string name="load_more_data_error">加载失败,点击重试</string>
 
     <string-array name="tab_names">
         <item>首页</item>

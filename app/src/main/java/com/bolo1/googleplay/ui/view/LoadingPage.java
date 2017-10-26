@@ -1,6 +1,8 @@
 package com.bolo1.googleplay.ui.view;
 
 import android.content.Context;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.AttrRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -30,7 +32,9 @@ public abstract class LoadingPage extends FrameLayout {
     private View page_error;
     private View page_empty;
     private View mSuccessPage;
-    private static final String tag="LoadingPage";
+    private static final String tag = "LoadingPage";
+
+    private ResultState resultState;
 
     public LoadingPage(@NonNull Context context) {
         super(context);
@@ -68,7 +72,7 @@ public abstract class LoadingPage extends FrameLayout {
 
     //根据当前状态显示不同图片
     private void showRightPage() {
-        page_loading.setVisibility(CURRENT_STATE == STATE_LOAD_UNDO || CURRENT_STATE == STATE_LOAD_LOADING ? View.VISIBLE : View.GONE);
+        page_loading.setVisibility((CURRENT_STATE == STATE_LOAD_UNDO || CURRENT_STATE == STATE_LOAD_LOADING )? View.VISIBLE : View.GONE);
         page_error.setVisibility(CURRENT_STATE == STATE_LOAD_ERROR ? View.VISIBLE : View.GONE);
         page_empty.setVisibility(CURRENT_STATE == STATE_LOAD_EMPTY ? View.VISIBLE : View.GONE);
         if (mSuccessPage == null && CURRENT_STATE == STATE_LOAD_SUCCESS) {
@@ -77,8 +81,8 @@ public abstract class LoadingPage extends FrameLayout {
                 addView(mSuccessPage);
             }
         }
-        if(mSuccessPage!=null){
-            mSuccessPage.setVisibility(CURRENT_STATE==STATE_LOAD_SUCCESS?View.VISIBLE:View.GONE);
+        if (mSuccessPage != null) {
+            mSuccessPage.setVisibility(CURRENT_STATE == STATE_LOAD_SUCCESS ? View.VISIBLE : View.GONE);
         }
     }
 
@@ -91,7 +95,7 @@ public abstract class LoadingPage extends FrameLayout {
                 @Override
                 public void run() {
                     final ResultState resultState = onLoad();
-                    //运行主线程
+                 //   运行主线程
                     UIUtils.runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
@@ -103,6 +107,7 @@ public abstract class LoadingPage extends FrameLayout {
                             }
                         }
                     });
+
                 }
             }.start();
         }
@@ -119,8 +124,9 @@ public abstract class LoadingPage extends FrameLayout {
         STATE_EMPTY(STATE_LOAD_EMPTY),
         STATE_ERROR(STATE_LOAD_ERROR);
         private int state;
-         ResultState(int state){
-            this.state=state;
+
+        ResultState(int state) {
+            this.state = state;
         }
 
         public int getState() {

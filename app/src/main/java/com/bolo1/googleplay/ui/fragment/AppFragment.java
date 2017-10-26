@@ -18,4 +18,6 @@ public  class AppFragment extends BaseFragment{
     public LoadingPage.ResultState initData() {
         return LoadingPage.ResultState.STATE_ERROR;
     }
+
+
 }

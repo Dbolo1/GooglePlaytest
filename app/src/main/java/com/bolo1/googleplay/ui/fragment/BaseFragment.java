@@ -11,6 +11,8 @@ import android.widget.TextView;
 import com.bolo1.googleplay.ui.view.LoadingPage;
 import com.bolo1.googleplay.utils.UIUtils;
 
+import java.util.ArrayList;
+
 /**
  * Created by 菠萝 on 2017/10/16.
  */
@@ -40,5 +42,21 @@ public abstract class BaseFragment extends android.support.v4.app.Fragment {
         if(loadingPage!=null){
             loadingPage.onLoadData();
         }
+    }
+
+
+
+    public LoadingPage.ResultState check(Object object) {
+        if (object != null) {
+            if(object instanceof  ArrayList) {
+                ArrayList list = (ArrayList) object;
+                if (list.isEmpty()) {
+                    return LoadingPage.ResultState.STATE_EMPTY;
+                }else{
+                    return LoadingPage.ResultState.STATE_SUCCESS;
+                }
+            }
+        }
+        return LoadingPage.ResultState.STATE_ERROR;
     }
 }

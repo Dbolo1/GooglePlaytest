@@ -18,4 +18,6 @@ public  class CategoryFragment extends BaseFragment{
     public LoadingPage.ResultState initData() {
         return LoadingPage.ResultState.STATE_EMPTY;
     }
+
+
 }
