@@ -27,7 +27,7 @@ public abstract class BaseHolder<T> {
     public void setData(T data) {
         this.data = data;
         //设置数据的同时刷新布局文件
-        refreshView(data);
+        refreshView(this.data);
     }
     //获取数据
     public T getData() {

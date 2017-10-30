@@ -44,7 +44,7 @@ public abstract class MyBaseAdapter<T> extends BaseAdapter {
     }
 
     //子类可以重写此方法
-    public int getInnerType(int pos) {
+    public int getInnerType(int position) {
         return TYPE_NORMAL;
     }
 
@@ -74,7 +74,7 @@ public abstract class MyBaseAdapter<T> extends BaseAdapter {
             if (getItemViewType(position) == TYPE_MORE) {
                 viewHolder = new MoreHolder(hasMore());
             } else {
-                viewHolder = getHolder();
+                viewHolder = getHolder(position);
             }
         } else {
             viewHolder = (BaseHolder) convertView.getTag();
@@ -132,7 +132,7 @@ public abstract class MyBaseAdapter<T> extends BaseAdapter {
     }
 
     //获取holder交给子类去实现
-    public abstract BaseHolder<T> getHolder();
+    public abstract BaseHolder<T> getHolder(int position);
 
     //子类可以重写此方法判断是否由更多数据
     public boolean hasMore() {

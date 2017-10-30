@@ -1,10 +1,93 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
-<TextView
-    android:id="@+id/test_textview"
-    android:text="测试文本"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content" />
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="5dp"
+        android:layout_marginLeft="5dp"
+        android:background="@drawable/list_item_bg_selector"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dp">
+
+            <ImageView
+                android:id="@+id/iv_icon"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dp"
+                android:src="@drawable/ic_default" />
+
+            <TextView
+                android:id="@+id/tv_apply_name"
+                style="@style/TextUtil"
+                android:layout_toRightOf="@id/iv_icon"
+                android:text="应用名称" />
+
+            <RatingBar
+                android:id="@+id/rb_apply_rating"
+                android:layout_width="wrap_content"
+                android:layout_height="10dp"
+                android:isIndicator="true"
+                android:layout_below="@+id/tv_apply_name"
+                android:layout_toRightOf="@+id/iv_icon"
+                android:progressDrawable="@drawable/custom_ratingbar"
+                android:rating="4"
+                />
+
+            <TextView
+                android:id="@+id/tv_apply_size"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/rb_apply_rating"
+                android:layout_toRightOf="@+id/iv_icon"
+                android:text="3.5m"
+                android:textColor="#8000"
+                android:textSize="18sp" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/iv_download_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/action_download" />
+
+                <TextView
+                    style="@style/TextUtil"
+                    android:text="下载" />
+
+            </LinearLayout>
+        </RelativeLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="0.2dp"
+            android:background="@android:color/black" />
+
+        <TextView
+            android:id="@+id/tv_apply_des"
+            style="@style/TextUtil"
+            android:layout_width="match_parent"
+            android:layout_marginTop="5dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="哈啊哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊" />
+    </LinearLayout>
 </LinearLayout>

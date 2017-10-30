@@ -30,17 +30,17 @@ public abstract class BaseProtocol<T> {
         //从服务器获得数据
         //优先取得缓存
         String result = getCache(index);
-        LogUtils.d("取得缓存数据"+result);
+//        LogUtils.d("取得缓存数据"+result);
         if (StringUtils.isEmpty(result)) {
             //如果缓存为空，则请求网络
-            LogUtils.d("缓存为空，请求网络");
+//            LogUtils.d("缓存为空，请求网络");
             result = getDataFromService(index);
         }
         //如果result不如空
         if (result != null) {
 
             T data = parseData(result);
-            LogUtils.d("缓存不为空，直接解析所得结果" + data);
+//            LogUtils.d("缓存不为空，直接解析所得结果" + data);
             return data;
 //            return parseData(result);
         }
@@ -53,10 +53,10 @@ public abstract class BaseProtocol<T> {
         if (httpResult != null) {
             String result = httpResult.getString();
             //在此设置缓存
-            LogUtils.d("设置缓存" + result);
+//            LogUtils.d("设置缓存" + result);
             if (!StringUtils.isEmpty(result)) {
                 setCache(index, result);
-                LogUtils.d("设置的缓存数据" + result);
+//                LogUtils.d("设置的缓存数据" + result);
             }
             return result;
         }

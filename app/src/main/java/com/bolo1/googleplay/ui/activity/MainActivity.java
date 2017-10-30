@@ -4,13 +4,16 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 
 import com.bolo1.googleplay.R;
 import com.bolo1.googleplay.ui.fragment.BaseFragment;
 import com.bolo1.googleplay.ui.fragment.FragmentFactory;
 import com.bolo1.googleplay.ui.view.PagerTab;
+import com.bolo1.googleplay.utils.LogUtils;
 import com.bolo1.googleplay.utils.UIUtils;
 
 public class MainActivity extends BaseActivity {
@@ -21,7 +24,15 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main);
+        //设置actionbar 的logo显示
+//        ActionBar actionBar = getSupportActionBar();
+//        actionBar.setLogo(R.drawable.ic_launcher);
+//        actionBar.setDisplayUseLogoEnabled(true);
+//        actionBar.setDisplayShowHomeEnabled(true);
+
+
         viewpager = (ViewPager) findViewById(R.id.viewpager);
         pager_tab = (PagerTab) findViewById(R.id.pager_tab);
         MyAdapter myAdapter = new MyAdapter(getSupportFragmentManager());
@@ -35,6 +46,7 @@ public class MainActivity extends BaseActivity {
             @Override
             public void onPageSelected(int position) {
                 BaseFragment fragment = FragmentFactory.onCreateFragment(position);
+                LogUtils.d("选中的位置===="+position+"选中的fragment==="+fragment);
                 fragment.loadData();
             }
 
@@ -67,7 +79,10 @@ public class MainActivity extends BaseActivity {
         @Override
         public Fragment getItem(int position) {
             BaseFragment fragment = FragmentFactory.onCreateFragment(position);
-            return fragment;
+            LogUtils.d("选中的位置  getItem  ===="+position+"创建的fragment   getItem ===="+fragment);
+
+                return fragment;
+
         }
 
         //获得标签标题总数

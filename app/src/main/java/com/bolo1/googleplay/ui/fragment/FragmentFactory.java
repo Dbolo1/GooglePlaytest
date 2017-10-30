@@ -1,6 +1,6 @@
 package com.bolo1.googleplay.ui.fragment;
 
-import android.app.Fragment;
+import com.bolo1.googleplay.utils.LogUtils;
 
 import java.util.HashMap;
 
@@ -13,6 +13,7 @@ public class FragmentFactory {
     public static BaseFragment onCreateFragment(int pos) {
         //先从集合中取如果没有才去new对象，提高性能
         BaseFragment fragment = fragmentHashMap.get(pos);
+        LogUtils.d("当前选中的fragment"+fragment);
         if(fragment==null){
             switch (pos) {
                 case 0:
@@ -25,7 +26,7 @@ public class FragmentFactory {
                     fragment = new GameFragment();
                     break;
                 case 3:
-                    fragment = new SubjuectFragment();
+                    fragment = new SubjectFragment();
                     break;
                 case 4:
                     fragment = new RecommendFragment();
@@ -39,8 +40,9 @@ public class FragmentFactory {
                 default:
                     break;
             }
-            fragmentHashMap.put(pos,fragment);
         }
+        fragmentHashMap.put(pos,fragment);
+        LogUtils.d("创建fragment后的布局====="+fragment);
             return fragment;
     }
 

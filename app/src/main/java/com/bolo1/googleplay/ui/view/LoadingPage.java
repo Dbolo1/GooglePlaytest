@@ -9,6 +9,7 @@ import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.FrameLayout;
 
 import com.bolo1.googleplay.R;
@@ -34,16 +35,16 @@ public abstract class LoadingPage extends FrameLayout {
     private View mSuccessPage;
     private static final String tag = "LoadingPage";
 
-    private ResultState resultState;
 
+    //改变了调用方法
     public LoadingPage(@NonNull Context context) {
-        super(context);
-        initView();
+        this(context,null);
+
     }
 
     public LoadingPage(@NonNull Context context, @Nullable AttributeSet attrs) {
-        super(context, attrs);
-        initView();
+        this(context, attrs,0);
+
     }
 
     public LoadingPage(@NonNull Context context, @Nullable AttributeSet attrs, @AttrRes int defStyleAttr) {
@@ -60,6 +61,13 @@ public abstract class LoadingPage extends FrameLayout {
         //加载失败图片
         if (page_error == null) {
             page_error = UIUtils.getinflate(R.layout.page_error);
+            Button bt_retry_load = (Button) page_error.findViewById(R.id.bt_retry_load);
+            bt_retry_load.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    onLoadData();
+                }
+            });
             addView(page_error);
         }
         //数据为空图片
@@ -102,8 +110,9 @@ public abstract class LoadingPage extends FrameLayout {
                             if (resultState != null) {
                                 //获得当前状态并赋值
                                 CURRENT_STATE = resultState.getState();
-                                Log.d(tag,"当前的状态"+CURRENT_STATE);
+                                Log.d(tag,"当前的状态===="+CURRENT_STATE);
                                 showRightPage();
+                                CURRENT_STATE=STATE_LOAD_UNDO;
                             }
                         }
                     });
